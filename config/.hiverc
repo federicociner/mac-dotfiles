@@ -1,0 +1,3 @@
+set hive.cli.print.header = true;
+set hive.resultset.use.unique.column.names = false;
+set hive.cli.print.current.db=true;
