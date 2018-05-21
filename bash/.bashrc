@@ -1,7 +1,14 @@
 # ------------------------- General Settings ------------------------
-# change prompt
-export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n| => "
-export PS2="| => "
+# change prompt to use powerline-shell (install via Homebrew)
+function _update_ps1() {
+  PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+  PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+# add color
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -25,5 +32,3 @@ alias ls='ls -GFh'
 # function: create ZIP archive
 zipf () { zip -r "$1".zip "$1" ; }
 
-# full recursive directory listing
-alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
