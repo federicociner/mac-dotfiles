@@ -1,27 +1,39 @@
-" enable syntax highligting
+" Enable syntax highligting
 filetype plugin on
 filetype indent on
 syntax on
 
-" set UTF-8 as standard encoding
+" Set UTF-8 as standard encoding
 set encoding=utf8
 
-" enable autoread
+" Enable autoread
 set autoread
 
-" set 5 lines to the cursor (when moving vertically using j/k)
+" Set 5 lines to the cursor (when moving vertically using j/k)
 set so=5
 
-" show current position
+" Show current position
 set ruler
 
-" highlight search results
+" Highlight search results
 set hlsearch
 
-" configure backspace
+" Configure backspace
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" set one tab equal to 4 spaces
+" Set one tab equal to 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+
+" Declare the list of plugins.
+Plug 'scrooloose/nerdtree'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+" NERDtree settings
+autocmd vimenter * NERDTree"
