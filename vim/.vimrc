@@ -25,3 +25,21 @@ set whichwrap+=<,>,h,l
 " set one tab equal to 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+" vim-plug config (must have vim-plug installed via https://github.com/junegunn/vim-plug)
+call plug#begin('~/.vim/plugged')
+
+" plugins
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'myusuf3/numbers.vim'
+
+" initialize plugin system
+call plug#end()
+
+" autostart NERDTre
+autocmd vimenter * NERDTree
+
+" mappings for numbers.vim
+nnoremap <F3> :NumbersToggle<CR>
+nnoremap <F4> :NumbersOnOff<CR>
