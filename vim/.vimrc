@@ -1,28 +1,28 @@
-" Enable syntax highligting
+" enable syntax highligting
 filetype plugin on
 filetype indent on
 syntax on
 
-" Set UTF-8 as standard encoding
+" set UTF-8 as standard encoding
 set encoding=utf8
 
-" Enable autoread
+" enable autoread
 set autoread
 
-" Set 5 lines to the cursor (when moving vertically using j/k)
+" set 5 lines to the cursor (when moving vertically using j/k)
 set so=5
 
-" Show current position
+" show current position
 set ruler
 
-" Highlight search results
+" highlight search results
 set hlsearch
 
-" Configure backspace
+" configure backspace
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" Set one tab equal to 4 spaces
+" set one tab equal to 4 spaces
 set shiftwidth=4
 set tabstop=4
 
@@ -33,13 +33,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'myusuf3/numbers.vim'
+Plug 'qpkorr/vim-bufkill'
 
 " initialize plugin system
 call plug#end()
 
-" autostart NERDTre
+" NERDTree config
 autocmd vimenter * NERDTree
 
 " mappings for numbers.vim
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
+
+" mappings to switch buffers easily
+nnoremap <silent> <F12> :bn<CR>
+nnoremap <silent> <S-F12> :bp<CR>
+
