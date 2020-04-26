@@ -1,10 +1,5 @@
 # ------------------------- General Settings ------------------------
-<<<<<<< HEAD
 # Change prompt to use powerline-shell (install via Homebrew)
-=======
-
-# change prompt to use powerline-shell (install via Homebrew)
->>>>>>> 9673c65e0033e9b02b0f4d293013f642ac75110c
 function _update_ps1() {
   PS1=$(powerline-shell $?)
 }
