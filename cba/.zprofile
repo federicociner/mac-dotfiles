@@ -1,8 +1,8 @@
-# Source .bashrc
-[[ ~/.bashrc ]] && source ~/.bashrc
+# Set $USER variable
+export USER=cinerfe
 
-# Bash-completion via Homebrew (brew install bash-completion)
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# Source .bashrc
+[[ ~/.zshrc ]] && source ~/.zshrc
 
 # ----------------------- System-specific ---------------------------
 # Java
@@ -12,13 +12,26 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 # CNTLM Proxy for CBA
-export http_proxy=http://127.0.0.1:3128
-export https_proxy=$http_proxy
-export HTTP_PROXY=$http_proxy
-export HTTPS_PROXY=$http_proxy
+#export http_proxy=http://127.0.0.1:3128
+#export https_proxy=$http_proxy
+#export HTTP_PROXY=$http_proxy
+#export HTTPS_PROXY=$http_proxy
 
 # Vault
 export VAULT_ADDR=https://vault.ai.cba
+
+# Miniconda3 2018.12
+__conda_setup="$('/Users/cinerfe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/cinerfe/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
 
 # ----------------- SBT with internal Artifactory -------------------
 # Use internal Artifactory
