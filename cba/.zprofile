@@ -20,19 +20,6 @@ export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 # Vault
 export VAULT_ADDR=https://vault.ai.cba
 
-# Miniconda3 2018.12
-__conda_setup="$('/Users/cinerfe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/cinerfe/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
 # ----------------- SBT with internal Artifactory -------------------
 # Use internal Artifactory
 JVM_OPTS="-Dsbt.override.build.repos=true -Dsbt.boot.credentials=/Users/cinerfe/.sbt/.credentials -Dsbt.repository.config=/Users/cinerfe/code/cba/tooling.repositories/repositories"
@@ -53,3 +40,24 @@ SBT_OPTS="$SBT_OPTS -Dfile.encoding=UTF8"
 
 export JVM_OPTS
 export SBT_OPTS
+
+# ------------------------- Application Settings ------------------------
+# NVM settings
+#
+# Installation: https://github.com/nvm-sh/nvm#installing-and-updating
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Miniconda3 2018.12
+__conda_setup="$('/Users/cinerfe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/cinerfe/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
