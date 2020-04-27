@@ -1,9 +1,6 @@
 # Source .bashrc
 [[ ~/.bashrc ]] && source ~/.bashrc
 
-# bash-completion via Homebrew (brew install bash-completion)
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
 # Anaconda3 2018.12
 __conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/federicociner/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
 if [ $? -eq 0 ]; then

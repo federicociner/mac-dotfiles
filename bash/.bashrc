@@ -1,13 +1,4 @@
 # ------------------------- General Settings ------------------------
-# Change prompt to use powerline-shell (install via Homebrew)
-function _update_ps1() {
-  PS1=$(powerline-shell $?)
-}
-
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-  PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
 # Add color
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
