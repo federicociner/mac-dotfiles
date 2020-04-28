@@ -43,7 +43,6 @@ export SBT_OPTS
 
 # ------------------------- Application Settings ------------------------
 # NVM settings
-#
 # Installation: https://github.com/nvm-sh/nvm#installing-and-updating
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
