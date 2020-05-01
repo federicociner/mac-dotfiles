@@ -17,7 +17,19 @@ Run the following command to install Homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-### 2. Install and configure zsh
+Then, run `brew doctor` to make sure there are no issues before proceeding with application installations. If there are no issues, run `./homebrew.sh` to install applications.
+
+### 2. Install Node
+
+Install Node version manager first:
+
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```
+
+Once `nvm` is installed, install the latest version of Node by running `nvm install node`. Then run `./npm` to install necessary global packages.
+
+### 3. Install and configure zsh
 
 If you want to use **zsh** as your default shell and take advantage of community frameworks like _Oh My Zsh_, follow the instructions below:
 
@@ -62,3 +74,17 @@ If you want to use **zsh** as your default shell and take advantage of community
    ```
 
 7. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
+
+### 4. Setup symlinks
+
+#### GitHub
+
+```sh
+ln -sv ~/.dotfiles/git/.gitconfig ~
+```
+
+#### vim
+
+```sh
+ln -sv ~/.dotfiles/vim/.vimrc ~
+```
