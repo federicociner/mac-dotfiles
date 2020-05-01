@@ -1,6 +1,9 @@
 # Source .zshrc
 [[ ~/.zshrc ]] && source ~/.zshrc
 
+# Prioritize Homebrew-installed applications
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+
 # ------------------------- Application Settings ------------------------
 # NVM settings
 # Installation: https://github.com/nvm-sh/nvm#installing-and-updating

@@ -4,7 +4,10 @@ A collection of portable configuration files for various tools, specifically dev
 
 ## Setup
 
-Follow the instructions below when setting up a new build of Mac OS.
+First, make sure Xcode and Xcode Command Line tools are installed. In general, follow these guides:
+
+- [How to Set up an Apple Mac for Software Development](https://www.stuartellis.name/articles/mac-setup/#creating-a-private-applications-folder)
+- [macOS Setup Guide](https://sourabhbajaj.com/mac-setup/Homebrew/)
 
 ### 1. Install Homebrew
 
