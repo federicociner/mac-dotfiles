@@ -1,5 +1,5 @@
-# Set $USER variable
-export USER=$USER
+# Set $USER variable to LAN ID
+export USER=cinerfe
 
 # Source .bashrc
 [[ ~/.zshrc ]] && source ~/.zshrc
