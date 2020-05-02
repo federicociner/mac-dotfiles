@@ -3,14 +3,19 @@
 brew tap heroku/brew && \
 brew install zsh \
     git \
-    tree \
+    jq \
     heroku \
-    pyenv
+    pyenv \
+    tree \
+    wget
 
-brew cask install docker \
+brew cask install anki \
+    docker \
     dropbox \
     google-chrome \
     java \
     qlcolorcode \
     qlmarkdown \
+    slack \
     visual-studio-code \
+    vlc

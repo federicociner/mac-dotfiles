@@ -99,7 +99,7 @@ Install pyenv with Homebrew to install and manage different versions of Python. 
 brew install pyenv
 ```
 
-Then, run the following command in zsh to add some configuration for pyenv in your `.zshrc` file:
+Once pyenv is installed, run the following command in zsh to add some configuration for pyenv in your `.zshrc` file (if it isn't already present):
 
 ```sh
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
