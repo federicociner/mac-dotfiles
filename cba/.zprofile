@@ -49,14 +49,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Miniconda3 2018.12
-__conda_setup="$('/Users/cinerfe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/'${USER}'/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+echo $__conda_setup
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/cinerfe/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/$USER/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/$USER/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/cinerfe/miniconda3/bin:$PATH"
+        export PATH="/Users/$USER/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup

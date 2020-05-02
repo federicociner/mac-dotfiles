@@ -14,8 +14,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenv)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
 # Set default blocksize for ls, df, du
 export BLOCKSIZE=1k
 
