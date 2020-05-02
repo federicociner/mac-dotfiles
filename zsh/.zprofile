@@ -1,3 +1,6 @@
+# Set $USER variable
+export USER=federicociner
+
 # Source .zshrc
 [[ ~/.zshrc ]] && source ~/.zshrc
 
