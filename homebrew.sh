@@ -4,7 +4,8 @@ brew tap heroku/brew && \
 brew install zsh \
     git \
     tree \
-    heroku
+    heroku \
+    pyenv
 
 brew cask install docker \
     dropbox \
