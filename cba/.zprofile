@@ -1,5 +1,5 @@
 # Set $USER variable
-export USER=cinerfe
+export USER=$USER
 
 # Source .bashrc
 [[ ~/.zshrc ]] && source ~/.zshrc
