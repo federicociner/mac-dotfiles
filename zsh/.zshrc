@@ -23,10 +23,6 @@ alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -GFh'
 
-# Docker aliases
-alias drmi_untagged="docker rmi $(docker images | grep '<none>' | awk '{print $3}')"
-alias drm_all='docker rm $(docker ps -aq)'
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
