@@ -13,6 +13,7 @@ brew tap homebrew/cask-fonts && \
 brew cask install anki \
     docker \
     dropbox \
+    font-meslolg-nerd-font \
     font-saucecodepro-nerd-font \
     font-ubuntu-nerd-font \
     google-chrome \
