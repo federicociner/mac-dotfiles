@@ -18,7 +18,8 @@ brew cask install anki \
     font-ubuntu-nerd-font \
     google-chrome \
     java \
-    qlcolorcode \
+	mactex \
+	qlcolorcode \
     qlmarkdown \
     slack \
     visual-studio-code \
