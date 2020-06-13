@@ -22,6 +22,7 @@ brew cask install \
     google-chrome \
     java11 \
 	mactex \
+    maven \
 	qlcolorcode \
     qlmarkdown \
     slack \
