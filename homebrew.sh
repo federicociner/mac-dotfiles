@@ -1,7 +1,8 @@
 #!/bin/sh
 
 brew tap heroku/brew && \
-brew install zsh \
+brew install \
+    zsh \
     git \
     jq \
     heroku \
@@ -10,17 +11,21 @@ brew install zsh \
     wget
 
 brew tap homebrew/cask-fonts && \
-brew cask install anki \
+brew cask install \
+    adoptopenjdk/openjdk/adoptopenjdk8 \
+    anki \
     docker \
     dropbox \
     font-meslolg-nerd-font \
     font-saucecodepro-nerd-font \
     font-ubuntu-nerd-font \
     google-chrome \
-    java \
+    java11 \
 	mactex \
 	qlcolorcode \
     qlmarkdown \
     slack \
     visual-studio-code \
     vlc
+
+brew cask install
