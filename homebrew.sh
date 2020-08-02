@@ -7,6 +7,7 @@ brew install \
     jq \
     heroku \
     pyenv \
+	pyenv-virtualenv \
     tree \
     wget
 
@@ -23,10 +24,9 @@ brew cask install \
     java11 \
 	mactex \
     maven \
+	postman \
 	qlcolorcode \
     qlmarkdown \
     slack \
     visual-studio-code \
     vlc
-
-brew cask install
