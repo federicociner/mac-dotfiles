@@ -7,7 +7,8 @@ brew install \
     jq \
     heroku \
     pyenv \
-	pyenv-virtualenv \
+    pyenv-virtualenv \
+    sqlite \
     tree \
     wget
 
@@ -18,15 +19,11 @@ brew cask install \
     docker \
     dropbox \
     font-meslolg-nerd-font \
-    font-saucecodepro-nerd-font \
-    font-ubuntu-nerd-font \
     google-chrome \
     java11 \
-	mactex \
+    mactex \
     maven \
-	postman \
-	qlcolorcode \
-    qlmarkdown \
+    postman \
     slack \
     visual-studio-code \
     vlc
