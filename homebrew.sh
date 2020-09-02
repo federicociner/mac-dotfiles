@@ -14,8 +14,8 @@ brew install \
 
 brew tap homebrew/cask-fonts && \
 brew cask install \
-    adoptopenjdk/openjdk/adoptopenjdk8 \
     anki \
+    db-browser-for-sqlite \
     docker \
     dropbox \
     font-meslolg-nerd-font \
