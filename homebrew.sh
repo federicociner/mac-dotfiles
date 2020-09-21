@@ -1,9 +1,11 @@
 #!/bin/sh
 
+brew tap homebrew/cask-versions && \
 brew tap heroku/brew && \
 brew install \
     zsh \
     git \
+    java11 \
     jq \
     heroku \
     pyenv \
@@ -13,7 +15,6 @@ brew install \
     wget
 
 brew tap homebrew/cask-fonts && \
-brew tap homebrew/cask-versions && \
 brew cask install \
     anki \
     db-browser-for-sqlite \
@@ -22,7 +23,6 @@ brew cask install \
     font-meslo-lg-nerd-font \
     google-chrome \
     iterm2 \
-    java \
     mactex \
     maven \
     postman \
