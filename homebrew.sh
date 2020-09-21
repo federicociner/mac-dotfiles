@@ -22,7 +22,7 @@ brew cask install \
     font-meslo-lg-nerd-font \
     google-chrome \
     iterm2 \
-    java11 \
+    java \
     mactex \
     maven \
     postman \
