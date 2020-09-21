@@ -18,8 +18,9 @@ brew cask install \
     db-browser-for-sqlite \
     docker \
     dropbox \
-    font-meslolg-nerd-font \
+    font-meslo-lg-nerd-font \
     google-chrome \
+    iterm2 \
     java11 \
     mactex \
     maven \
