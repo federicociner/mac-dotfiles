@@ -1,6 +1,3 @@
-# Set $USER variable to account name
-export USER=federicociner
-
 # Source .zshrc
 [[ ~/.zshrc ]] && source ~/.zshrc
 
