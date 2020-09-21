@@ -5,9 +5,10 @@ brew tap heroku/brew && \
 brew install \
     zsh \
     git \
-    java11 \
+    java \
     jq \
     heroku \
+    maven \
     pyenv \
     pyenv-virtualenv \
     sqlite \
@@ -24,7 +25,6 @@ brew cask install \
     google-chrome \
     iterm2 \
     mactex \
-    maven \
     postman \
     slack \
     visual-studio-code \
