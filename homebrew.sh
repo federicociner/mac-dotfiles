@@ -13,6 +13,7 @@ brew install \
     wget
 
 brew tap homebrew/cask-fonts && \
+brew tap homebrew/cask-versions && \
 brew cask install \
     anki \
     db-browser-for-sqlite \
