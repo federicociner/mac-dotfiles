@@ -19,7 +19,7 @@ Run the following command to install Homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-Then, run `brew doctor` to make sure there are no issues before proceeding with application installations. If there are no issues, run `./homebrew.sh` to install the required applications.
+Then, run `brew doctor` to make sure there are no issues before proceeding with application installations.
 
 ### 2. Install git and Homebrew packages
 
@@ -39,39 +39,33 @@ Once nvm is installed, install the latest version of Node by running `nvm instal
 
 If you want to use zsh as your default shell and take advantage of community frameworks like _Oh My Zsh_, follow the instructions below:
 
-1. Install **zsh** with Homebrew:
-
-   ```sh
-   brew install zsh
-   ```
-
-2. Set **zsh** as the default shell:
+1. Set **zsh** as the default shell:
 
    ```sh
    chsh -s /bin/zsh # if using default Apple zsh
    chsh -s /usr/local/bin/zsh # if installed with Homebrew
    ```
 
-3. Download and install _Oh My Zsh_ in your home directory with curl:
+2. Download and install _Oh My Zsh_ in your home directory with curl:
 
    ```sh
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
    ```
 
-4. Download the Powerlevel10k theme:
+3. Download the Powerlevel10k theme:
 
    ```sh
    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
    ```
 
-5. Install _Oh My Zsh_ plugins:
+4. Install _Oh My Zsh_ plugins:
 
    ```sh
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
    ```
 
-6. Create symlinks to your home directory:
+5. Create symlinks to your home directory:
 
    ```sh
    ln -sv ~/.dotfiles/zsh/.zshrc ~
@@ -79,7 +73,7 @@ If you want to use zsh as your default shell and take advantage of community fra
    ln -sv ~/.dotfiles/zsh/.zprofile ~
    ```
 
-7. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
+6. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
 
 ### 5. Setup symlinks
 
