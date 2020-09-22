@@ -26,6 +26,13 @@ set whichwrap+=<,>,h,l
 set shiftwidth=4
 set tabstop=4
 
+" install vim-plug automatically
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " vim-plug config (must have vim-plug installed via https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
 
@@ -48,4 +55,3 @@ nnoremap <F4> :NumbersOnOff<CR>
 " mappings to switch buffers easily
 nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
-
