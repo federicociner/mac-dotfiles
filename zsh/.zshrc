@@ -9,7 +9,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenv)
+plugins=(docker docker-compose git zsh-autosuggestions zsh-syntax-highlighting virtualenv)
 
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
