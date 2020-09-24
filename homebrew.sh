@@ -1,11 +1,13 @@
 #!/bin/sh
 
+brew update && \
 brew tap homebrew/cask-versions && \
 brew tap heroku/brew && \
 brew install \
-    zsh \
+    fzf \
     git \
     java \
+    jesseduffield/lazydocker/lazydocker \
     jq \
     heroku \
     maven \
@@ -13,7 +15,8 @@ brew install \
     pyenv-virtualenv \
     sqlite \
     tree \
-    wget
+    wget \
+    zsh
 
 brew tap homebrew/cask-fonts && \
 brew cask install \
