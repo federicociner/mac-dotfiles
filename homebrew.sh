@@ -21,6 +21,7 @@ brew install \
 brew tap homebrew/cask-fonts && \
 brew cask install \
     anki \
+    browserstacklocal \
     db-browser-for-sqlite \
     docker \
     dropbox \
