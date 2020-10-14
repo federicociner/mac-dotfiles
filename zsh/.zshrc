@@ -23,6 +23,9 @@ alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -GFh'
 
+# Alias Docker commands
+alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
