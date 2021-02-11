@@ -14,6 +14,7 @@ brew install \
     pyenv \
     pyenv-virtualenv \
     sqlite \
+    tig \
     tree \
     wget \
     zsh
