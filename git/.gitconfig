@@ -15,3 +15,5 @@
     path = /Users/federicociner/.netlify/helper/git-config
 [rerere]
 	enabled = true
+[pager]
+	branch = false
