@@ -1,3 +1,10 @@
+[core]
+    pager = "delta --dark"
+[delta]
+    side-by-side = true
+    minus-style = white bold "#8B0000"
+    plus-style = black bold "#00FF00"
+    navigate = true
 [user]
     email = federico.ciner@gmail.com
     name = Federico Ciner
@@ -10,6 +17,7 @@
     process = git-lfs filter-process
 [pull]
     rebase = false
+
 # This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
 [include]
     path = /Users/federicociner/.netlify/helper/git-config

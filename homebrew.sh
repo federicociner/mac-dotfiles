@@ -6,6 +6,7 @@ brew tap heroku/brew && \
 brew install \
     fzf \
     git \
+    git-delta \
     java \
     jesseduffield/lazydocker/lazydocker \
     jq \
