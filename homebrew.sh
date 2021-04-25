@@ -21,7 +21,7 @@ brew install \
     zsh
 
 brew tap homebrew/cask-fonts && \
-brew cask install \
+brew install \
     anki \
     browserstacklocal \
     db-browser-for-sqlite \
