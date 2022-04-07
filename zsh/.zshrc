@@ -1,3 +1,5 @@
+DISABLE_MAGIC_FUNCTIONS="true"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
 
@@ -29,12 +31,14 @@ alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-tr
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# Load pyenv
+eval "$(pyenv init -)"
 
+# Laod fzf fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load ZMV
 autoload zmv
+
+# The next line updates PATH for Netlify's Git Credential Helper.
+test -f '/Users/fed/Library/Preferences/netlify/helper/path.zsh.inc' && source '/Users/fed/Library/Preferences/netlify/helper/path.zsh.inc'
