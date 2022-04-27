@@ -27,13 +27,7 @@ Install git by running `brew install git` and then clone this repository. Once t
 
 ### 3. Install Node
 
-Install Node version manager first:
-
-```sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-```
-
-Once nvm is installed, install the latest version of Node by running `nvm install node`. Then run `./npm.sh` to install any additional global packages.
+Install Node Version Manager (nvm) with Homebrew i.e. `brew install nvm`. Then, install the latest version of Node by running `nvm install node`. Finally, run `./npm.sh` to install any additional global packages.
 
 ### 4. Install and configure zsh
 
