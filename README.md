@@ -30,7 +30,11 @@ Install git by running `brew install git` and then clone this repository. Once t
 
 ### 3. Import iTerm2 profiles
 
-Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. To do this, go to `Preferences` under the iTerm2 application and then navigate to `Profiles`. Click on the "default" profile and select `Other Actions...` at the bottom of the window. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder.
+Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. Follow the instructions below:
+
+1. Go to `Preferences` under the iTerm2 application and then navigate to `Profiles`
+2. Click on the "default" profile and select `Other Actions...` at the bottom of the window
+3. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder
 
 ### 4. Install and configure zsh
 
@@ -94,7 +98,7 @@ At this point, you can install `pyenv` to manage different versions of Python. A
 
 1. Run `curl https://pyenv.run | zsh` to install `pyenv`
 
-2. Once that is done, install the version of Python you want to use e.g. Python 3.7.7.
+2. Install the version of Python you want to use e.g. Python 3.7.7
 
    ```sh
    pyenv install 3.7.7
