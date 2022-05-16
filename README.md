@@ -1,4 +1,4 @@
-# Mac OS Dotfiles
+# macOS dotfiles
 
 A collection of portable configuration files for various tools, specifically developed for my macOS build.
 
@@ -23,11 +23,14 @@ Then, run `brew doctor` to make sure there are no issues before proceeding with 
 
 ### 2. Install git and Homebrew packages
 
-Install git by running `brew install git` and then clone this repository. Once that step is completed, set your current directory as the root of the repository and run `./homebrew.sh` to install all of the main applications and packages that I used for development and non-development purposes.
+Install git by running `brew install git` and then clone this repository. Once that step is completed, set your current directory as the root of the repository and run the following scripts:
 
-### 3. Install Node
+- `./homebrew/basic.sh` to install the basic utilities and programs that I use on all of my macOS environments, both personal and work
+- `./homebrew/personal.sh` to install additional applications on personal machines that do not have some sort of remote management setup, which is common on company-issued MacBooks
 
-Install Node Version Manager (nvm) with Homebrew i.e. `brew install nvm`. Then, install the latest version of Node by running `nvm install node`. Finally, run `./npm.sh` to install any additional global packages.
+### 3. Import iTerm2 profiles
+
+Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. To do this, go to `Preferences` under the iTerm2 application and then navigate to `Profiles`. Click on the "default" profile and select `Other Actions...` at the bottom of the window. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder.
 
 ### 4. Install and configure zsh
 
@@ -62,38 +65,38 @@ If you want to use zsh as your default shell and take advantage of community fra
 5. Create symlinks to your home directory:
 
    ```sh
-   ln -sv ~/.dotfiles/zsh/.zshrc ~
-   ln -sv ~/.dotfiles/zsh/.p10k.zsh ~
-   ln -sv ~/.dotfiles/zsh/.zprofile ~
+   ln -svf ~/.dotfiles/zsh/.zshrc ~
+   ln -svf ~/.dotfiles/zsh/.p10k.zsh ~
+   ln -svf ~/.dotfiles/zsh/.zprofile ~
    ```
 
 6. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
 
-### 5. Setup symlinks
+### 5. Install Node
 
-#### GitHub
+Install Node Version Manager (nvm) with Homebrew i.e. `brew install nvm`. Then, install the latest version of Node by running `nvm install node`.
 
-```sh
-ln -sv ~/.dotfiles/git/.gitconfig ~
-```
+### 6. Setup symlinks
 
-#### vim
+Run the following in your terminal to update symlinks.
 
 ```sh
-ln -sv ~/.dotfiles/vim/.vimrc ~
+# GitHub
+ln -svf ~/.dotfiles/git/.gitconfig ~
+
+# Vim
+ln -svf ~/.dotfiles/vim/.vimrc ~
 ```
 
-### 6. Install Python
+### 7. Install Python via pyenv
 
-At this point, pyenv should be installed and can be used to manage different versions of Python. Anaconda and Miniconda are too bloated, and managing Python with Homebrew is too complicated, so this is the "easy" way out. Run the following command in zsh to add some configuration for pyenv in your `.zshrc` file (if it isn't already present):
+At this point, you can install `pyenv` to manage different versions of Python. Anaconda and Miniconda are too bloated, and managing Python with Homebrew is too complicated, so this is the "easy" way out. Follow the instructions below to install `pyenv`.
 
-```sh
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
-```
+1. Run `curl https://pyenv.run | zsh` to install `pyenv`
 
-Once that is done, install the version of Python you want to use e.g. Python 3.7.7.
+2. Once that is done, install the version of Python you want to use e.g. Python 3.7.7.
 
-```sh
-pyenv install 3.7.7
-pyenv global 3.7.7
-```
+   ```sh
+   pyenv install 3.7.7
+   pyenv global 3.7.7
+   ```

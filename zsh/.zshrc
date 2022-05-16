@@ -31,14 +31,8 @@ alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-tr
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Load pyenv
-eval "$(pyenv init -)"
-
-# Laod fzf fuzzy finder
+# Loadd fzf fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load ZMV
 autoload zmv
-
-# The next line updates PATH for Netlify's Git Credential Helper.
-test -f '/Users/fed/Library/Preferences/netlify/helper/path.zsh.inc' && source '/Users/fed/Library/Preferences/netlify/helper/path.zsh.inc'

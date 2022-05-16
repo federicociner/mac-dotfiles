@@ -21,5 +21,3 @@
 	enabled = true
 [pager]
 	branch = false
-[credential]
-	helper = netlify
