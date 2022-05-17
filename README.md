@@ -78,7 +78,13 @@ If you want to use zsh as your default shell and take advantage of community fra
 
 ### 5. Install Node
 
-Install Node Version Manager (nvm) with Homebrew i.e. `brew install nvm`. Then, install the latest version of Node by running `nvm install node`.
+Install Node Version Manager i.e. `nvm` by running the following command in your terminal.
+
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+Once `nvm` is installed, you can install and run multiple versions of Node e.g. `nvm install node 12` and `nvm use 12` in order to install and run Node 12.
 
 ### 6. Setup symlinks
 
