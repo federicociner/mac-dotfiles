@@ -1,0 +1,11 @@
+# OS hidden files
+.DS_Store
+
+# Editors
+.idea
+.vscode
+*.iml
+.vs
+jsconfig.json
+*.swp
+*.code-workspace
