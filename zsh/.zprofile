@@ -2,7 +2,13 @@
 [[ ~/.zshrc ]] && source ~/.zshrc
 
 # Prioritize Homebrew-installed applications
-eval $(/opt/homebrew/bin/brew shellenv)
+# On Apple silicon, Homebrew installs files into the /opt/homebrew/ folder, which is not part of
+# the default shell $PATH.
+arch=$(uname -m)
+if [[ $arch == "arm64" ]]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 # ------------------------- Application Settings ------------------------
