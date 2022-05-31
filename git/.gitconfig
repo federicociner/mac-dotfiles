@@ -18,6 +18,6 @@
 [pull]
     rebase = true
 [rerere]
-	enabled = true
+    enabled = true
 [pager]
-	branch = false
+    branch = false
