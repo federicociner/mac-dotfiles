@@ -58,3 +58,18 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# ---------------------- Atlassian settings --------------------- #
+# jenv settings - only enabled if jenv is installed
+# https://www.jenv.be/
+jenv_path=$(which jenv)
+if [[ ! -z "$jenv_path" ]]; then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
+fi
+
+# Load ZMV
+autoload zmv
+export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
+export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"
+# --------------------------------------------------------------- #
