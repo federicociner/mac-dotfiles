@@ -7,23 +7,7 @@ arch=$(uname -m)
 if [[ $arch == "arm64" ]]; then
     eval $(/opt/homebrew/bin/brew shellenv)
 fi
-
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-
-# Set default blocksize for ls, df, du
-export BLOCKSIZE=1k
-
-# Alias commonly used commands
-alias ll='ls -FGlAhp'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ls='ls -GFh'
-
-# Alias Docker commands
-alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-
-# Load fzf fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ---------------------- oh-my-zsh settings ---------------------- #
 # Path to your oh-my-zsh installation.
@@ -58,3 +42,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# Load fzf fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Alias commonly used commands
+alias ll='ls -FGlAhp'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ls='ls -GFh'
+
+# Alias Docker commands
+alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'

@@ -7,23 +7,7 @@ arch=$(uname -m)
 if [[ $arch == "arm64" ]]; then
     eval $(/opt/homebrew/bin/brew shellenv)
 fi
-
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-
-# Set default blocksize for ls, df, du
-export BLOCKSIZE=1k
-
-# Alias commonly used commands
-alias ll='ls -FGlAhp'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ls='ls -GFh'
-
-# Alias Docker commands
-alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-
-# Load fzf fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ---------------------- oh-my-zsh settings ---------------------- #
 # Path to your oh-my-zsh installation.
@@ -62,14 +46,25 @@ eval "$(pyenv virtualenv-init -)"
 # ---------------------- Atlassian settings --------------------- #
 # jenv settings - only enabled if jenv is installed
 # https://www.jenv.be/
-jenv_path=$(which jenv)
-if [[ ! -z "$jenv_path" ]]; then
-    export PATH="$HOME/.jenv/bin:$PATH"
-    eval "$(jenv init -)"
-fi
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
 # Load ZMV
 autoload zmv
 export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"
+
+# Add Automation codebase binaries to path
+export PATH="$HOME/code/barrel/bin:$PATH"
 # --------------------------------------------------------------- #
+
+# Load fzf fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Alias commonly used commands
+alias ll='ls -FGlAhp'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+
+# Alias Docker commands
+alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
