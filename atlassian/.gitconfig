@@ -1,0 +1,23 @@
+[core]
+    pager = "delta --dark"
+[delta]
+    side-by-side = true
+    minus-style = white bold "#8B0000"
+    plus-style = black bold "#00FF00"
+    navigate = true
+[user]
+    email = fciner@atlassian.com
+    name = Federico Ciner
+[push]
+    default = simple
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+[pull]
+    rebase = true
+[rerere]
+    enabled = true
+[pager]
+    branch = false
