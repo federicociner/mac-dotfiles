@@ -9,6 +9,9 @@ if [[ $arch == "arm64" ]]; then
 fi
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
+# rustup
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # ---------------------- oh-my-zsh settings ---------------------- #
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
