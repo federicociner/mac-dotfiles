@@ -1,5 +1,8 @@
 [core]
     pager = "delta --dark"
+[alias]
+    fetch-jfe = fetch origin master stable --prune --prune-tags
+    rebase-jfe = rebase origin/master
 [delta]
     side-by-side = true
     minus-style = white bold "#8B0000"
@@ -21,3 +24,7 @@
     enabled = true
 [pager]
     branch = false
+[trace2]
+	eventTarget = /Users/fciner/.gittrace/dump
+	configparams = custom.metacommands
+	eventBrief = true

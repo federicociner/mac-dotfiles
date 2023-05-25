@@ -12,6 +12,9 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 # rustup
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# setsid
+export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
+
 # ---------------------- oh-my-zsh settings ---------------------- #
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
