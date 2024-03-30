@@ -74,3 +74,8 @@ alias mkdir='mkdir -pv'
 
 # Alias Docker commands
 alias docker_rmd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+
+source ~/.afm-git-configrc
+
+# Atlassian VPN
+export ATLASSIAN_VPN_MFA_DEFAULT=push

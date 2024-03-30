@@ -25,6 +25,7 @@
 [pager]
     branch = false
 [trace2]
-	eventTarget = /Users/fciner/.gittrace/dump
+	eventTarget = af_unix:/Users/fciner/.gittrace/trace.sock
 	configparams = custom.metacommands
 	eventBrief = true
+	eventNesting = 1
