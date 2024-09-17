@@ -1,5 +1,15 @@
 [core]
     pager = "delta --dark"
+[alias]
+    ac = !git add -A && git commit
+    acm = !git add -A && git commit -m
+    gst = !git status
+    co = !git checkout
+    po = !git push origin
+    sup = !git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+    pf = !git push --force
+    far = !git fetch origin $(git rev-parse --abbrev-ref origin/HEAD | sed \"s|^origin/||\") && git rebase $(git rev-parse --abbrev-ref origin/HEAD)
+    arc = !git add -A && git rebase --continue
 [delta]
     side-by-side = true
     minus-style = white bold "#8B0000"
