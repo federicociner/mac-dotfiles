@@ -64,6 +64,7 @@ git config --global alias.gst '!git status -sb'
 git config --global alias.co '!git checkout'
 git config --global alias.po '!git push origin'
 git config --global alias.pf '!git push --force'
+git config --global alias.pu '!git pull origin $(git rev-parse --abbrev-ref HEAD)'
 git config --global alias.sup '!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 git config --global alias.far '!git fetch origin $(git rev-parse --abbrev-ref origin/HEAD | sed "s|^origin/||") && git rebase $(git rev-parse --abbrev-ref origin/HEAD)'
 # ---------------------- END: add aliases ------------------------------ #
