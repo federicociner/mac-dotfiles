@@ -1,15 +1,15 @@
 [core]
     pager = "delta --dark"
 [alias]
-    acm = !git add -A && git commit -m
-    gst = !git status -sb
-    co = !git checkout
-    po = !git push origin
-    sup = !git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
-    pf = !git push --force
-    far = !git fetch origin $(git rev-parse --abbrev-ref origin/HEAD | sed \"s|^origin/||\") && git rebase $(git rev-parse --abbrev-ref origin/HEAD)
-    arc = !git add -A && git rebase --continue
-    pu = !git pull origin $(git rev-parse --abbrev-ref HEAD)
+	acm = !git add -A && git commit -m
+	gst = !git status -sb
+	co = !git checkout
+	po = !git push origin
+	sup = !git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+	pf = !git push --force
+	far = !git fetch origin $(git rev-parse --abbrev-ref origin/HEAD | sed \"s|^origin/||\") && git rebase $(git rev-parse --abbrev-ref origin/HEAD)
+	arc = !git add -A && git rebase --continue
+	pu = !git pull origin $(git rev-parse --abbrev-ref HEAD)
 [delta]
     side-by-side = true
     minus-style = white bold "#8B0000"
@@ -32,7 +32,7 @@
 [pager]
     branch = false
 [trace2]
-    eventTarget = af_unix:/Users/fciner/.gittrace/trace.sock
-    configparams = custom.metacommands
-    eventBrief = true
-    eventNesting = 1
+	eventTarget = af_unix:/Users/fciner/.gittrace/trace.sock
+	configparams = custom.metacommands
+	eventBrief = true
+	eventNesting = 1
