@@ -9,3 +9,6 @@
 jsconfig.json
 *.swp
 *.code-workspace
+
+# Secrets
+.secrets.local

@@ -1,5 +1,6 @@
 [core]
-    pager = "delta --dark"
+	pager = "delta --dark"
+	excludesfile = /Users/fciner/.gitignore_global
 [alias]
 	acm = !git add -A && git commit -m
 	gst = !git status -sb
@@ -11,26 +12,26 @@
 	arc = !git add -A && git rebase --continue
 	pu = !git pull origin $(git rev-parse --abbrev-ref HEAD)
 [delta]
-    side-by-side = true
-    minus-style = white bold "#8B0000"
-    plus-style = black bold "#00FF00"
-    navigate = true
+	side-by-side = true
+	minus-style = white bold "#8B0000"
+	plus-style = black bold "#00FF00"
+	navigate = true
 [user]
-    email = fciner@atlassian.com
-    name = Federico Ciner
+	email = fciner@atlassian.com
+	name = Federico Ciner
 [push]
-    default = simple
+	default = simple
 [filter "lfs"]
-    required = true
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 [pull]
-    rebase = true
+	rebase = true
 [rerere]
-    enabled = true
+	enabled = true
 [pager]
-    branch = false
+	branch = false
 [trace2]
 	eventTarget = af_unix:/Users/fciner/.gittrace/trace.sock
 	configparams = custom.metacommands

@@ -16,12 +16,10 @@ export PATH="$HOME/code/barrel/bin:$PATH"
 # Atlassian VPN
 export ATLASSIAN_VPN_MFA_DEFAULT=push
 
-# AFM git config file
-[[ ~/.afm-git-configrc ]] && source ~/.afm-git-configrc
-
 # sdkman
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# ---------------------- END: Atlassian settings ----------------------- #
-
 export PATH="/Users/fciner/.orbit/bin:$PATH"
+
+. "$HOME/.local/bin/env"
+# ---------------------- END: Atlassian settings ----------------------- #

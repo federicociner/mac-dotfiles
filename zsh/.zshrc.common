@@ -1,5 +1,18 @@
-DISABLE_MAGIC_FUNCTIONS="true"
+zmodload zsh/datetime
 
+function profile_start() {
+    typeset -g profile_start_time=$EPOCHREALTIME
+}
+
+function profile_section() {
+    local section="$1"
+    local current_time=$EPOCHREALTIME
+    local elapsed=$((current_time - profile_start_time))
+    echo "📊 $section: ${elapsed}s"
+    profile_start_time=$current_time
+}
+
+profile_start
 # ---------------------- BEGIN: Homebrew settings ---------------------- #
 # Prioritize Homebrew-installed applications
 # On Apple silicon, Homebrew installs files into the /opt/homebrew/ folder, which is not part of
@@ -15,8 +28,14 @@ export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 # ---------------------- END: Homebrew settings ------------------------ #
 
 # ---------------------- BEGIN: oh-my-zsh settings --------------------- #
+DISABLE_MAGIC_FUNCTIONS="true"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
+
+# Install nvm using zsh-nvm plugin
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -26,7 +45,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(docker docker-compose git zsh-autosuggestions zsh-syntax-highlighting virtualenv)
+plugins=(evalcache docker docker-compose git virtualenv zsh-autosuggestions zsh-nvm zsh-syntax-highlighting )
 
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
@@ -35,19 +54,19 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # ---------------------- END: oh-my-zsh settings ----------------------- #
 
-# ---------------------- BEGIN: nvm settings --------------------------- #
-# Installation: https://github.com/nvm-sh/nvm#installing-and-updating
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# ---------------------- END: nvm settings ----------------------------- #
-
 # ---------------------- BEGIN: pyenv settings ------------------------- #
 # Installation: https://github.com/pyenv/pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+# Load pyenv in the background to avoid blocking shell startup
+{
+    eval "$(pyenv init - --no-rehash)"
+    eval "$(pyenv virtualenv-init -)"
+} &!
+
+_evalcache pyenv init -
+_evalcache pyenv virtualenv-init -
 # ---------------------- END: pyenv settings --------------------------- #
 
 # ---------------------- BEGIN: add aliases ---------------------------- #
@@ -76,3 +95,12 @@ git config --global alias.far '!git fetch origin $(git rev-parse --abbrev-ref or
 # Include dotfiles in file system operations
 setopt dotglob
 # ---------------------- END: misc settings ---------------------------- #
+
+# ---------------------- BEGIN: load secrets --------------------------- #
+if [[ -f "$HOME/.dotfiles/.secrets.local" ]]; then
+    set -a  # automatically export all variables
+    source "$HOME/.dotfiles/.secrets.local"
+    set +a  # turn off auto-export
+fi
+# ---------------------- END: load secrets ----------------------------- #
+profile_section "shell startup time"
