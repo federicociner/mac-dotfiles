@@ -2,7 +2,7 @@
 
 A collection of portable configuration files for various tools, specifically developed for my macOS build.
 
-## Setup
+## Pre-requisites
 
 First, make sure Xcode and Xcode Command Line tools are installed. If you get stuck at any point, follow these guides:
 
@@ -11,7 +11,9 @@ First, make sure Xcode and Xcode Command Line tools are installed. If you get st
 
 I follow the steps below in the exact order they appear, because there are some dependencies between setup phases.
 
-### 1. Install Homebrew
+## Installation
+
+### Install Homebrew
 
 Run the following command to install Homebrew:
 
@@ -21,14 +23,14 @@ Run the following command to install Homebrew:
 
 Then, run `brew doctor` to make sure there are no issues before proceeding with application installations.
 
-### 2. Install git and Homebrew packages
+### Install git and packages
 
 Install git by running `brew install git` and then clone this repository. Once that step is completed, set your current directory as the root of the repository and run the following scripts:
 
 - `./homebrew/basic.sh` to install the basic utilities and programs that I use on all of my macOS environments, both personal and work
 - `./homebrew/personal.sh` to install additional applications on personal machines that do not have some sort of remote management setup, which is common on company-issued MacBooks
 
-### 3. Import iTerm2 profiles
+### Import iTerm2 profiles
 
 Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. Follow the instructions below:
 
@@ -36,7 +38,7 @@ Import iTerm2 profiles to enable the hotkey window terminal and further customis
 2. Click on the "default" profile and select `Other Actions...` at the bottom of the window
 3. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder
 
-### 4. Install and configure zsh
+### Install and configure zsh
 
 If you want to use zsh as your default shell and take advantage of community frameworks like _Oh My Zsh_, follow the instructions below:
 
@@ -77,17 +79,7 @@ If you want to use zsh as your default shell and take advantage of community fra
 
 6. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
 
-### 5. Install Node
-
-Install Node Version Manager i.e. `nvm` by running the following command in your terminal.
-
-```sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-```
-
-Once `nvm` is installed, you can install and run multiple versions of Node e.g. `nvm install node 12` and `nvm use 12` in order to install and run Node 12.
-
-### 6. Setup symlinks
+### Setup symlinks
 
 Run the following in your terminal to update symlinks.
 
@@ -99,7 +91,7 @@ ln -svf ~/.dotfiles/git/.gitconfig ~
 ln -svf ~/.dotfiles/vim/.vimrc ~
 ```
 
-### 7. Install Python via pyenv
+### Install pyenv
 
 At this point, you can install `pyenv` to manage different versions of Python. Anaconda and Miniconda are too bloated, and managing Python with Homebrew is too complicated, so this is the "easy" way out. Follow the instructions below to install `pyenv`.
 
