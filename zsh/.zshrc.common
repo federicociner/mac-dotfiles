@@ -1,18 +1,3 @@
-zmodload zsh/datetime
-
-function profile_start() {
-    typeset -g profile_start_time=$EPOCHREALTIME
-}
-
-function profile_section() {
-    local section="$1"
-    local current_time=$EPOCHREALTIME
-    local elapsed=$((current_time - profile_start_time))
-    echo "📊 $section: ${elapsed}s"
-    profile_start_time=$current_time
-}
-
-profile_start
 # ---------------------- BEGIN: Homebrew settings ---------------------- #
 # Prioritize Homebrew-installed applications
 # On Apple silicon, Homebrew installs files into the /opt/homebrew/ folder, which is not part of
@@ -29,6 +14,7 @@ export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 
 # ---------------------- BEGIN: oh-my-zsh settings --------------------- #
 DISABLE_MAGIC_FUNCTIONS="true"
+ZSH_DISABLE_COMPFIX=true
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
@@ -37,21 +23,25 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(evalcache docker docker-compose git virtualenv zsh-autosuggestions zsh-nvm zsh-syntax-highlighting )
-
-ZSH_DISABLE_COMPFIX=true
+plugins=(evalcache docker docker-compose git virtualenv zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Beautify iterm2 prompt with Pure theme
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug load
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 # ---------------------- END: oh-my-zsh settings ----------------------- #
 
 # ---------------------- BEGIN: pyenv settings ------------------------- #
@@ -103,4 +93,3 @@ if [[ -f "$HOME/.dotfiles/.secrets.local" ]]; then
     set +a  # turn off auto-export
 fi
 # ---------------------- END: load secrets ----------------------------- #
-profile_section "shell startup time"

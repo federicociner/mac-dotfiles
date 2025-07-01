@@ -1,24 +1,25 @@
 #!/bin/sh
 
 brew update && \
-brew tap homebrew/cask-versions && \
 brew install \
     fzf \
     git \
     git-delta \
     jq \
     openssl \
+    pure \
+    pyenv \
+    pyenv-virtualenv \
     readline \
+    rectangle \
+    ripgrep \
     tig  \
     tree \
     wget \
     xz \
-    zsh
+    zplug
 
-brew tap homebrew/cask-fonts && \
-brew install \
+brew install --cask \
     font-meslo-lg-nerd-font \
     iterm2 \
-    mactex \
-    visual-studio-code \
-    vlc
+    visual-studio-code

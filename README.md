@@ -27,8 +27,8 @@ Then, run `brew doctor` to make sure there are no issues before proceeding with 
 
 Install git by running `brew install git` and then clone this repository. Once that step is completed, set your current directory as the root of the repository and run the following scripts:
 
-- `./homebrew/basic.sh` to install the basic utilities and programs that I use on all of my macOS environments, both personal and work
-- `./homebrew/personal.sh` to install additional applications on personal machines that do not have some sort of remote management setup, which is common on company-issued MacBooks
+- `./homebrew/core.sh` to install the basic utilities and programs that I use on all of my macOS environments, both personal and work.
+- `./homebrew/apps.sh` to install additional applications.
 
 ### Import iTerm2 profiles
 
@@ -80,7 +80,9 @@ If you want to use zsh as your default shell and take advantage of community fra
 
 6. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
 
-### Setup symlinks
+## Configuration
+
+### Set up symlinks
 
 Run the following in your terminal to update symlinks.
 
@@ -92,15 +94,6 @@ ln -svf ~/.dotfiles/git/.gitconfig ~
 ln -svf ~/.dotfiles/vim/.vimrc ~
 ```
 
-### Install pyenv
+### Make iterm beautiful
 
-At this point, you can install `pyenv` to manage different versions of Python. Anaconda and Miniconda are too bloated, and managing Python with Homebrew is too complicated, so this is the "easy" way out. Follow the instructions below to install `pyenv`.
-
-1. Run `curl https://pyenv.run | zsh` to install `pyenv`
-
-2. Install the version of Python you want to use e.g. Python 3.7.7
-
-   ```sh
-   pyenv install 3.7.7
-   pyenv global 3.7.7
-   ```
+Follow this [guide](https://medium.com/airfrance-klm/beautify-your-iterm2-and-prompt-40f148761a49).
