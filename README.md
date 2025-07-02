@@ -46,7 +46,7 @@ If you want to use zsh as your default shell and take advantage of community fra
 
    ```sh
    chsh -s /bin/zsh # if using default Apple zsh
-   chsh -s /usr/local/bin/zsh # if installed with Homebrew
+   chsh -s /opt/homebrew/bin/zsh # if installed with Homebrew
    ```
 
 2. Download and install _Oh My Zsh_ in your home directory with curl:
@@ -55,13 +55,7 @@ If you want to use zsh as your default shell and take advantage of community fra
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
    ```
 
-3. Download the Powerlevel10k theme:
-
-   ```sh
-   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
-   ```
-
-4. Install _oh my zsh_ plugins:
+3. Install _oh my zsh_ plugins:
 
    ```sh
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -70,29 +64,16 @@ If you want to use zsh as your default shell and take advantage of community fra
    git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
    ```
 
-5. Create symlinks to your home directory:
+4. Create symlinks to your home directory:
 
    ```sh
    ln -svf ~/.dotfiles/zsh/.zshrc ~
-   ln -svf ~/.dotfiles/zsh/.p10k.zsh ~
    ln -svf ~/.dotfiles/zsh/.zprofile ~
+   ln -svf ~/.dotfiles/git/.gitconfig ~
+   ln -svf ~/.dotfiles/vim/.vimrc ~
    ```
 
-6. Restart shell or run `source ~/.zprofile` for changes to take effect. You may have to re-run `p10k configure` in order to install the required fonts to get all the right icons.
-
-## Configuration
-
-### Set up symlinks
-
-Run the following in your terminal to update symlinks.
-
-```sh
-# GitHub
-ln -svf ~/.dotfiles/git/.gitconfig ~
-
-# Vim
-ln -svf ~/.dotfiles/vim/.vimrc ~
-```
+## Post-installation
 
 ### Make iterm beautiful
 
