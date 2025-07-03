@@ -16,6 +16,7 @@ brew install \
     ripgrep \
     tig  \
     tree \
+    uv \
     wget \
     xz \
     zplug
