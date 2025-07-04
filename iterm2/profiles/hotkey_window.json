@@ -1,5 +1,5 @@
 {
-  "ASCII Ligatures" : true,
+  "Custom Directory" : "No",
   "Working Directory" : "\/Users\/fciner",
   "Prompt Before Closing 2" : false,
   "Selected Text Color" : {
@@ -461,7 +461,7 @@
   },
   "Cursor Type" : 0,
   "Blur" : false,
-  "Normal Font" : "Menlo-Regular 13",
+  "Normal Font" : "Menlo-Regular 15",
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.94509810209274292,
@@ -493,7 +493,7 @@
     "Green Component" : 0.92941170930862427
   },
   "HotKey Activated By Modifier" : false,
-  "Transparency" : 0.041009676395939096,
+  "Transparency" : 0,
   "Background Color" : {
     "Red Component" : 0.15686270594596863,
     "Color Space" : "sRGB",
@@ -521,7 +521,7 @@
   ],
   "Unicode Normalization" : 0,
   "Visual Bell" : true,
-  "Custom Directory" : "No",
+  "ASCII Ligatures" : true,
   "Thin Strokes" : 4,
   "Ansi 5 Color" : {
     "Red Component" : 1,

@@ -22,6 +22,5 @@ brew install \
     zplug
 
 brew install --cask \
-    font-meslo-lg-nerd-font \
     iterm2 \
     visual-studio-code
