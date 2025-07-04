@@ -30,14 +30,6 @@ Install git by running `brew install git` and then clone this repository. Once t
 - `./homebrew/core.sh` to install the basic utilities and programs that I use on all of my macOS environments, both personal and work.
 - `./homebrew/apps.sh` to install additional applications.
 
-### Import iTerm2 profiles
-
-Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. Follow the instructions below:
-
-1. Go to `Preferences` under the iTerm2 application and then navigate to `Profiles`
-2. Click on the "default" profile and select `Other Actions...` at the bottom of the window
-3. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder
-
 ### Install and configure zsh
 
 If you want to use zsh as your default shell and take advantage of community frameworks like _Oh My Zsh_, follow the instructions below:
@@ -78,3 +70,11 @@ If you want to use zsh as your default shell and take advantage of community fra
 ### Make iterm beautiful
 
 Follow this [guide](https://medium.com/airfrance-klm/beautify-your-iterm2-and-prompt-40f148761a49).
+
+### Import iTerm2 profiles
+
+Import iTerm2 profiles to enable the hotkey window terminal and further customise iTerm2. Follow the instructions below:
+
+1. Go to `Preferences` under the iTerm2 application and then navigate to `Profiles`
+2. Click on the "default" profile and select `Other Actions...` at the bottom of the window
+3. You should see an option called `Import JSON Profiles...` which will allow you to select and import the profiles in the `./iterm2/profiles` folder

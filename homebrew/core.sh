@@ -3,7 +3,6 @@
 brew update && \
 brew install \
     fzf \
-    git \
     git-delta \
     git-lfs \
     jq \
