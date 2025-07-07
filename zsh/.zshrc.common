@@ -84,6 +84,9 @@ git config --global alias.far '!git fetch origin $(git rev-parse --abbrev-ref or
 
 # Include dotfiles in file system operations
 setopt dotglob
+
+# Enable local user scripts
+export PATH="$HOME/bin:$PATH"
 # ---------------------- END: misc settings ---------------------------- #
 
 # ---------------------- BEGIN: load secrets --------------------------- #
