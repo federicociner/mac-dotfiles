@@ -11,3 +11,10 @@ export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 # ---------------------- END: Atlassian settings ----------------------- #
+
+# bun completions
+[ -s "/Users/fciner/.bun/_bun" ] && source "/Users/fciner/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
