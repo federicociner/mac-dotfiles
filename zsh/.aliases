@@ -1,0 +1,4 @@
+alias ll='ls -FGlAhp'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ls='ls -GFh'

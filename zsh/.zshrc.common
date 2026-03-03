@@ -60,13 +60,8 @@ _evalcache pyenv virtualenv-init -
 # ---------------------- END: pyenv settings --------------------------- #
 
 # ---------------------- BEGIN: add aliases ---------------------------- #
-# Alias commonly used commands
-alias ll='ls -FGlAhp'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ls='ls -GFh'
+source ~/.aliases
 
-# git aliases
 git config --global alias.acm '!git add -A && git commit -m'
 git config --global alias.arc '!git add -A && git rebase --continue'
 git config --global alias.gst '!git status -sb'
