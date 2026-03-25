@@ -1,3 +1,6 @@
+# Base
+shell-integration = none
+
 # Appearance
 font-size = 16
 window-padding-x = 12

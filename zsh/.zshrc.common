@@ -82,12 +82,7 @@ setopt dotglob
 
 # Enable local user scripts
 export PATH="$HOME/bin:$PATH"
-# ---------------------- END: misc settings ---------------------------- #
 
-# ---------------------- BEGIN: load secrets --------------------------- #
-if [[ -f "$HOME/.dotfiles/.secrets.local" ]]; then
-    set -a  # automatically export all variables
-    source "$HOME/.dotfiles/.secrets.local"
-    set +a  # turn off auto-export
-fi
-# ---------------------- END: load secrets ----------------------------- #
+# Set VS Code as default editor
+export EDITOR=code
+# ---------------------- END: misc settings ---------------------------- #
