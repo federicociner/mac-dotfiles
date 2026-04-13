@@ -1,6 +1,9 @@
 # Base
 shell-integration = none
 
+# Theme - swap between: catppuccin-frappe, catppuccin-mocha, catppuccin-macchiato, catppuccin-latte
+theme = catppuccin-frappe
+
 # Appearance
 font-size = 16
 window-padding-x = 12

@@ -31,6 +31,17 @@ source $ZSH/oh-my-zsh.sh
 # Beautify iterm2 prompt with Pure theme
 export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
+
+# Configure Pure prompt colors to match Catppuccin Frappe
+# https://github.com/sindresorhus/pure#colors
+# Must be set BEFORE loading Pure theme
+zstyle :prompt:pure:path color cyan
+zstyle :prompt:pure:prompt color blue
+zstyle :prompt:pure:execution_time color yellow
+zstyle :prompt:pure:git:branch color magenta
+zstyle :prompt:pure:git:dirty color red
+zstyle :prompt:pure:git:action color cyan
+
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug load
