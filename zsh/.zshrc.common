@@ -94,6 +94,6 @@ setopt dotglob
 # Enable local user scripts
 export PATH="$HOME/bin:$PATH"
 
-# Set VS Code as default editor
-export EDITOR=code
+# Set vim as default editor
+export EDITOR=vim
 # ---------------------- END: misc settings ---------------------------- #
