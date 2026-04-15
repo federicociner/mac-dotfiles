@@ -10,6 +10,8 @@ export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"
 # jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+# Aliases
+alias rovodev='uv run --project /Users/fciner/code/atlassian/acra-python rovodev'
 # ---------------------- END: Atlassian settings ----------------------- #
 
 # bun completions
