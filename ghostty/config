@@ -1,5 +1,5 @@
 # Base
-shell-integration-features = ssh-terminfo
+shell-integration-features =
 
 # Theme - swap between: catppuccin-frappe, catppuccin-mocha, catppuccin-macchiato, catppuccin-latte
 theme = catppuccin-frappe

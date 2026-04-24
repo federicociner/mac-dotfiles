@@ -26,6 +26,9 @@ export NVM_LAZY_LOAD=true
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(evalcache docker docker-compose git virtualenv zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
+# Disable oh-my-zsh theme since we use Pure via zplug
+ZSH_THEME=""
+
 source $ZSH/oh-my-zsh.sh
 
 # Beautify iterm2 prompt with Pure theme
