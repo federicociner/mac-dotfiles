@@ -100,3 +100,34 @@ export PATH="$HOME/bin:$PATH"
 # Set vim as default editor
 export EDITOR=vim
 # ---------------------- END: misc settings ---------------------------- #
+
+# ---------------------- BEGIN: nvm settings --------------------------- #
+autoload -U add-zsh-hook
+
+_find_nvmrc_up() {
+  local dir="$PWD"
+
+  while [ "$dir" != "/" ]; do
+    if [ -f "$dir/.nvmrc" ]; then
+      echo "$dir/.nvmrc"
+      return 0
+    fi
+
+    dir="${dir:h}"
+  done
+
+  return 1
+}
+
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path="$(_find_nvmrc_up)" || return 0
+
+  local nvmrc_version
+  nvmrc_version="$(cat "$nvmrc_path")"
+
+  nvm use "$nvmrc_version"
+}
+
+add-zsh-hook chpwd load-nvmrc
+# ------------------------ END: nvm settings --------------------------- #
