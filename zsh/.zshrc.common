@@ -1,133 +1,268 @@
-# ---------------------- BEGIN: Homebrew settings ---------------------- #
-# Prioritize Homebrew-installed applications
-# On Apple silicon, Homebrew installs files into the /opt/homebrew/ folder, which is not part of
-# the default shell $PATH.
-arch=$(uname -m)
-if [[ $arch == "arm64" ]]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
+# Interactive zsh setup, tuned for startup speed.
+#
+# Ground rule: nothing on the startup path may spawn a process. No `$(tool ...)`,
+# no `eval "$(tool init)"`, no plugin manager. Anything slow is either resolved
+# statically here, or loaded on first use.
+#
+# Profile with:  ZPROF=1 zsh -lic exit      Benchmark with:  zsh-bench-startup
+
+[[ -n ${ZPROF-} ]] && zmodload zsh/zprof
+
+# ------------------------------ environment ------------------------------- #
+export EDITOR=vim
+export ZSH="$HOME/.oh-my-zsh"            # only used as a library of files; omz itself is not loaded
+export ZSH_CACHE_DIR="$ZSH/cache"
+export NVM_DIR="$HOME/.nvm"
+export PYENV_ROOT="$HOME/.pyenv"
+export BUN_INSTALL="$HOME/.bun"
+
+# Homebrew (static equivalent of `eval "$(brew shellenv)"`)
+if [[ -d /opt/homebrew ]]; then
+  export HOMEBREW_PREFIX=/opt/homebrew HOMEBREW_CELLAR=/opt/homebrew/Cellar HOMEBREW_REPOSITORY=/opt/homebrew
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+  [[ -z ${MANPATH-} ]] || export MANPATH=":${MANPATH#:}"
 fi
-export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
-# setsid
-export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
-# ---------------------- END: Homebrew settings ------------------------ #
+# Vite+ (defines the `vp` wrapper). Sourced before compinit on purpose: that
+# skips its `eval "$(vp ...)"` completion step; brew's _vp completion is used instead.
+[[ -r ~/.vite-plus/env ]] && . ~/.vite-plus/env
 
-# ---------------------- BEGIN: oh-my-zsh settings --------------------- #
-DISABLE_MAGIC_FUNCTIONS="true"
-ZSH_DISABLE_COMPFIX=true
+# Default nvm node, resolved by reading the alias file instead of loading nvm:
+# exact version if installed, else the highest one matching a prefix like "24",
+# else the highest installed.
+() {
+  local v=; local -a c
+  [[ -r $NVM_DIR/alias/default ]] && v=$(<$NVM_DIR/alias/default)
+  [[ -n $v ]] && c=( $NVM_DIR/versions/node/$v(N-/) $NVM_DIR/versions/node/v${v#v}*(N-/nOn) )
+  c+=( $NVM_DIR/versions/node/*(N-/nOn) )
+  typeset -g _nvm_default_bin=${c[1]:+$c[1]/bin}
+}
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/$USER/.oh-my-zsh"
+# PATH, highest priority first. (N-/) drops directories that do not exist.
+typeset -U path PATH fpath FPATH
+path=(
+  $_nvm_default_bin(N-/)
+  ~/.vite-plus/bin(N-/)
+  ~/.local/bin(N-/)
+  ~/.cargo/bin(N-/)
+  $BUN_INSTALL/bin(N-/)
+  ~/.jenv/shims(N-/)
+  /opt/homebrew/opt/util-linux/{bin,sbin}(N-/)
+  /opt/homebrew/opt/pyenv-virtualenv/shims(N-/)
+  $PYENV_ROOT/shims(N-/)
+  ~/bin(N-/)
+  /usr/local/{bin,sbin}(N-/)
+  /opt/homebrew/{bin,sbin}(N-/)
+  ${path:#$HOME/.vite-plus/fallback-bin}
+  ~/.vite-plus/fallback-bin(N-/)
+)
 
-# Install nvm using zsh-nvm plugin
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
+# ------------------------------ completion -------------------------------- #
+fpath=(
+  $ZSH_CACHE_DIR/completions(N-/)              # _docker (generated once by the omz docker plugin)
+  $ZSH/plugins/docker-compose(N-/)             # _docker-compose
+  /opt/homebrew/share/zsh/site-functions(N-/)
+  $fpath
+)
 
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(evalcache docker docker-compose git virtualenv zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
-# Disable oh-my-zsh theme since we use Pure via zplug
-ZSH_THEME=""
+# Emacs keymap must be selected before compinit: EDITOR=vim makes zsh default
+# to the vi keymap, and compinit's ^X bindings would land in the wrong one.
+bindkey -e
 
-source $ZSH/oh-my-zsh.sh
+# compinit once. The dump is trusted for 24h (-C skips the fpath scan and the
+# security audit); after that it is rebuilt. Run `zsh-recomp` after installing
+# a tool whose completion does not show up.
+autoload -Uz compinit
+() {
+  local dump=$HOME/.zcompdump
+  local -a fresh=( $dump(N.mh-24) )
+  if (( $#fresh )); then
+    compinit -C -d $dump
+  else
+    compinit -u -d $dump
+    zcompile $dump 2>/dev/null
+  fi
+}
+zsh-recomp() { rm -f ~/.zcompdump ~/.zcompdump.zwc; exec zsh -l }
 
-# Beautify iterm2 prompt with Pure theme
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
-source $ZPLUG_HOME/init.zsh
+# ---------------------------- oh-my-zsh pieces ---------------------------- #
+# The parts of oh-my-zsh that were actually in use, sourced directly: history
+# options, key bindings, completion styles, directory shortcuts, ls/grep colours
+# and the git aliases. Skipped: the plugin loader, update check, themes, termsupport
+# (Ghostty's shell integration and Pure handle title + cwd reporting).
+DISABLE_MAGIC_FUNCTIONS=true
+if [[ -d $ZSH/lib ]]; then
+  autoload -Uz is-at-least
+  for _f in functions misc history key-bindings completion directories grep clipboard theme-and-appearance git; do
+    source $ZSH/lib/$_f.zsh
+  done
+  source $ZSH/plugins/git/git.plugin.zsh
+  source $ZSH/plugins/docker-compose/docker-compose.plugin.zsh
+  # docker: aliases only. The plugin proper launches `docker completion zsh` in
+  # the background on every shell start; the cached _docker in fpath is enough.
+  if (( $+commands[docker] )); then
+    for _f in ${(f)"$(<$ZSH/plugins/docker/docker.plugin.zsh)"}; do
+      [[ $_f == alias\ * ]] && eval $_f
+    done
+  fi
+  unset _f
+  omz() { source $ZSH/lib/cli.zsh && omz "$@" }   # `omz update` etc. still work, loaded on demand
+fi
 
-# Configure Pure prompt colors to match Catppuccin Frappe
-# https://github.com/sindresorhus/pure#colors
-# Must be set BEFORE loading Pure theme
+# --------------------------------- nvm ------------------------------------ #
+# Default node is already on PATH (above). nvm itself loads on first use.
+nvm() {
+  unfunction nvm
+  source $NVM_DIR/nvm.sh --no-use
+  [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+  nvm "$@"
+}
+
+_find_nvmrc_up() {
+  local dir=$PWD
+  while [[ $dir != / ]]; do
+    [[ -f $dir/.nvmrc ]] && { REPLY=$dir/.nvmrc; return 0 }
+    dir=${dir:h}
+  done
+  return 1
+}
+load-nvmrc() {
+  _find_nvmrc_up || return 0
+  nvm use "$(<$REPLY)"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd load-nvmrc
+
+# -------------------------------- pyenv ----------------------------------- #
+# Static equivalent of `pyenv init -` + `pyenv virtualenv-init -`. The stock
+# virtualenv hook runs on every prompt; this one runs on directory change and
+# only forks pyenv when a virtualenv actually has to be (de)activated.
+if (( $+commands[pyenv] )); then
+  export PYENV_SHELL=zsh PYENV_VIRTUALENV_INIT=1
+  source /opt/homebrew/opt/pyenv/completions/pyenv.zsh 2>/dev/null
+
+  _pyenv_venv_sync() {
+    local v=${PYENV_VERSION-} d=$PWD
+    if [[ -z $v ]]; then
+      while :; do
+        [[ -f $d/.python-version ]] && { v=$(<$d/.python-version); break }
+        [[ $d == / ]] && break
+        d=${d:h}
+      done
+      [[ -z $v && -f $PYENV_ROOT/version ]] && v=$(<$PYENV_ROOT/version)
+    fi
+    v=${${v%%$'\n'*}%%:*}
+    if [[ -n $v && -e $PYENV_ROOT/versions/$v/pyvenv.cfg ]]; then
+      [[ $v == ${_pyenv_synced-} ]] || eval "$(command pyenv sh-activate --quiet 2>/dev/null || true)"
+    elif [[ -n ${PYENV_VIRTUAL_ENV-} && $v != ${_pyenv_synced-} ]]; then
+      eval "$(command pyenv sh-activate --quiet 2>/dev/null || command pyenv sh-deactivate --quiet 2>/dev/null || true)"
+    fi
+    typeset -g _pyenv_synced=$v
+  }
+  pyenv() {
+    local command=${1:-} ret
+    (( $# )) && shift
+    case $command in
+      activate|deactivate|rehash|shell) eval "$(command pyenv "sh-$command" "$@")" ;;
+      *) command pyenv "$command" "$@" ;;
+    esac
+    ret=$?
+    _pyenv_venv_sync
+    return $ret
+  }
+  add-zsh-hook chpwd _pyenv_venv_sync
+  _pyenv_venv_sync
+fi
+
+# --------------------------------- jenv ----------------------------------- #
+# Static equivalent of `jenv init -` with the export plugin. The stock hook
+# runs `jenv javahome` (~80ms) before every prompt; this resolves JAVA_HOME in
+# pure zsh and only when the directory changes.
+if [[ -d ~/.jenv/versions ]]; then
+  export JENV_SHELL=zsh JENV_LOADED=1
+  source /opt/homebrew/opt/jenv/libexec/completions/jenv.zsh 2>/dev/null
+
+  _jenv_java_home() {
+    local v=${JENV_VERSION-} d=$PWD
+    if [[ -z $v ]]; then
+      while :; do
+        [[ -f $d/.java-version ]] && { v=$(<$d/.java-version); break }
+        [[ $d == / ]] && break
+        d=${d:h}
+      done
+      [[ -z $v && -f ~/.jenv/version ]] && v=$(<~/.jenv/version)
+    fi
+    v=${v%%[[:space:]]*}
+    [[ $v == ${_jenv_synced-x} ]] && return
+    typeset -g _jenv_synced=$v
+    if [[ -n $v && -d ~/.jenv/versions/$v ]]; then
+      export JAVA_HOME=$HOME/.jenv/versions/$v
+    else
+      export JAVA_HOME="$(command jenv javahome 2>/dev/null)"   # "system" or unknown: ask jenv
+    fi
+    export JENV_FORCEJAVAHOME=true
+    if [[ -e $JAVA_HOME/bin/javac ]]; then
+      export JDK_HOME=$JAVA_HOME JENV_FORCEJDKHOME=true
+    fi
+  }
+  jenv() {
+    local command=${1-} ret
+    (( $# )) && shift
+    case $command in
+      enable-plugin|rehash|shell|shell-options) eval "$(command jenv "sh-$command" "$@")" ;;
+      *) command jenv "$command" "$@" ;;
+    esac
+    ret=$?
+    _jenv_java_home
+    return $ret
+  }
+  add-zsh-hook chpwd _jenv_java_home
+  _jenv_java_home
+fi
+
+# ------------------------- other tool completions ------------------------- #
+# bun: its completion file is 1000+ lines; load it the first time it is needed.
+if [[ -s $BUN_INSTALL/_bun ]]; then
+  _bun_lazy() { unfunction _bun_lazy; source $BUN_INSTALL/_bun; _bun "$@" }
+  compdef _bun_lazy bun
+fi
+# vpr completes like `vp run`
+if (( $+_comps[vp] )); then
+  _vpr() { words=(vp run "${words[@]:1}"); (( CURRENT++ )); ${=_comps[vp]} }
+  compdef _vpr vpr
+fi
+
+# ----------------------------- shell options ------------------------------ #
+setopt dotglob                # include dotfiles in globs
+source ~/.aliases
+
+# -------------------------------- prompt ---------------------------------- #
+# Pure (Homebrew), colours matched to Catppuccin Frappe. Git status is async,
+# so the prompt never waits on git.
 zstyle :prompt:pure:path color cyan
 zstyle :prompt:pure:prompt color blue
 zstyle :prompt:pure:execution_time color yellow
 zstyle :prompt:pure:git:branch color magenta
 zstyle :prompt:pure:git:dirty color red
 zstyle :prompt:pure:git:action color cyan
+autoload -Uz prompt_pure_setup && prompt_pure_setup
 
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug load
+# ------------------------- line editor plugins ---------------------------- #
+# Must come last: both wrap the widgets defined above.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1     # don't re-wrap every widget before each prompt
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40  # no suggestion lookups while editing long/pasted lines
+ZSH_HIGHLIGHT_MAXLENGTH=512         # don't re-highlight huge pasted buffers on every keystroke
+source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-# ---------------------- END: oh-my-zsh settings ----------------------- #
-
-# ---------------------- BEGIN: pyenv settings ------------------------- #
-# Installation: https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-# Load pyenv in the background to avoid blocking shell startup
-{
-    eval "$(pyenv init - --no-rehash)"
-    eval "$(pyenv virtualenv-init -)"
-} &!
-
-_evalcache pyenv init -
-_evalcache pyenv virtualenv-init -
-# ---------------------- END: pyenv settings --------------------------- #
-
-# ---------------------- BEGIN: add aliases ---------------------------- #
-source ~/.aliases
-
-git config --global alias.acm '!git add -A && git commit -m'
-git config --global alias.arc '!git add -A && git rebase --continue'
-git config --global alias.gst '!git status -sb'
-git config --global alias.co '!git checkout'
-git config --global alias.po '!git push origin'
-git config --global alias.pf '!git push --force'
-git config --global alias.pu '!git pull origin $(git rev-parse --abbrev-ref HEAD)'
-git config --global alias.sup '!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
-git config --global alias.far '!git fetch origin $(git rev-parse --abbrev-ref origin/HEAD | sed "s|^origin/||") && git rebase $(git rev-parse --abbrev-ref origin/HEAD)'
-# ---------------------- END: add aliases ------------------------------ #
-
-# ---------------------- BEGIN: misc settings -------------------------- #
-# Load fzf fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Include dotfiles in file system operations
-setopt dotglob
-
-# Enable local user scripts
-export PATH="$HOME/bin:$PATH"
-
-# Set vim as default editor
-export EDITOR=vim
-# ---------------------- END: misc settings ---------------------------- #
-
-# ---------------------- BEGIN: nvm settings --------------------------- #
-autoload -U add-zsh-hook
-
-_find_nvmrc_up() {
-  local dir="$PWD"
-
-  while [ "$dir" != "/" ]; do
-    if [ -f "$dir/.nvmrc" ]; then
-      echo "$dir/.nvmrc"
-      return 0
-    fi
-
-    dir="${dir:h}"
+# ------------------------------- tooling ---------------------------------- #
+# Ten cold starts of a login+interactive shell, as Ghostty launches it.
+zsh-bench-startup() {
+  local i
+  for i in {1..10}; do
+    /usr/bin/time -p env -i HOME=$HOME USER=$USER TERM=$TERM SHELL=$SHELL $SHELL -lic exit 2>&1 </dev/null | grep real
   done
-
-  return 1
 }
 
-load-nvmrc() {
-  local nvmrc_path
-  nvmrc_path="$(_find_nvmrc_up)" || return 0
-
-  local nvmrc_version
-  nvmrc_version="$(cat "$nvmrc_path")"
-
-  nvm use "$nvmrc_version"
-}
-
-add-zsh-hook chpwd load-nvmrc
-# ------------------------ END: nvm settings --------------------------- #
+[[ -n ${ZPROF-} ]] && zprof | head -30
+:
