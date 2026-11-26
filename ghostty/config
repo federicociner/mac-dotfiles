@@ -20,3 +20,5 @@ font-family-bold-italic = "JetBrains Mono Bold Italic"
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-size = 50%,75%
+# Show/hide instantly instead of a 0.2s slide
+quick-terminal-animation-duration = 0
